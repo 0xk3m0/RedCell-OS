@@ -1,0 +1,171 @@
+/* ════════════════════════════════════════════════════════
+   REDCELL OS v4 — DESIGN SYSTEM
+   Fonts: Plus Jakarta Sans · Nunito · Fira Code
+   ════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Nunito:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* ── Backgrounds ── */
+  --c-bg:    #05080f;
+  --c-bg1:   #080c17;
+  --c-bg2:   #0c1220;
+  --c-bg3:   #101928;
+  --c-bg4:   #152130;
+  --c-bg5:   #1a2a3d;
+
+  /* ── Brand colors ── */
+  --c-blue:       #4f8ef7;
+  --c-blue-b:     #7aacff;
+  --c-blue-d:     #2563eb;
+  --c-blue-dim:   rgba(79,142,247,.11);
+  --c-blue-glow:  rgba(79,142,247,.22);
+
+  --c-red:        #f05454;
+  --c-red-d:      #dc2626;
+  --c-red-dim:    rgba(240,84,84,.11);
+  --c-red-glow:   rgba(240,84,84,.22);
+
+  --c-green:      #34d399;
+  --c-green-d:    #059669;
+  --c-green-dim:  rgba(52,211,153,.11);
+
+  --c-amber:      #fbbf24;
+  --c-amber-d:    #d97706;
+  --c-amber-dim:  rgba(251,191,36,.11);
+
+  --c-purple:     #c084fc;
+  --c-purple-d:   #9333ea;
+  --c-purple-dim: rgba(192,132,252,.11);
+
+  --c-cyan:       #22d3ee;
+  --c-cyan-d:     #0891b2;
+  --c-cyan-dim:   rgba(34,211,238,.11);
+
+  --c-rose:       #fb7185;
+  --c-rose-dim:   rgba(251,113,133,.11);
+
+  --c-orange:     #fb923c;
+  --c-orange-dim: rgba(251,146,60,.11);
+
+  /* ── Text ── */
+  --t1: #eef2f8;
+  --t2: #8b96a8;
+  --t3: #4a5568;
+  --t4: #2a3546;
+
+  /* ── Borders ── */
+  --b0: rgba(255,255,255,.03);
+  --b1: rgba(255,255,255,.065);
+  --b2: rgba(255,255,255,.10);
+  --b3: rgba(255,255,255,.17);
+
+  /* ── Typography ── */
+  --f-disp: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --f-body: 'Nunito', system-ui, sans-serif;
+  --f-mono: 'Fira Code', 'JetBrains Mono', monospace;
+
+  /* ── Type scale (comfortable) ── */
+  --fs-2xs: 10px;
+  --fs-xs:  11.5px;
+  --fs-sm:  13px;
+  --fs-base:14.5px;
+  --fs-md:  16px;
+  --fs-lg:  18px;
+  --fs-xl:  22px;
+  --fs-2xl: 27px;
+  --fs-3xl: 34px;
+  --fs-4xl: 44px;
+
+  /* ── Line heights ── */
+  --lh-tight:   1.2;
+  --lh-snug:    1.35;
+  --lh-normal:  1.6;
+  --lh-relaxed: 1.75;
+  --lh-loose:   1.9;
+
+  /* ── Spacing ── */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px;
+  --s6:24px; --s8:32px; --s10:40px; --s12:48px;
+
+  /* ── Radius ── */
+  --r1:5px; --r2:9px; --r3:13px; --r4:18px; --r5:24px; --r-full:9999px;
+
+  /* ── Shadows ── */
+  --sh1: 0 1px 4px rgba(0,0,0,.3);
+  --sh2: 0 4px 18px rgba(0,0,0,.45);
+  --sh3: 0 8px 36px rgba(0,0,0,.6);
+  --sh4: 0 16px 52px rgba(0,0,0,.7);
+
+  /* ── Transitions ── */
+  --tr-fast: 100ms ease;
+  --tr-base: 160ms ease;
+  --tr-slow: 280ms cubic-bezier(.4,0,.2,1);
+  --tr-bounce: 320ms cubic-bezier(.34,1.56,.64,1);
+}
+
+html, body { height: 100%; }
+body {
+  background: var(--c-bg);
+  color: var(--t1);
+  font-family: var(--f-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: var(--f-disp);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  color: var(--t1);
+  letter-spacing: -0.018em;
+}
+h1 { font-size: var(--fs-3xl); letter-spacing: -0.025em; }
+h2 { font-size: var(--fs-2xl); letter-spacing: -0.02em; }
+h3 { font-size: var(--fs-xl); }
+h4 { font-size: var(--fs-lg); font-weight: 600; }
+h5 { font-size: var(--fs-md); font-weight: 600; }
+p  { color: var(--t2); line-height: var(--lh-relaxed); }
+a  { color: var(--c-blue-b); text-decoration: none; transition: color var(--tr-base); }
+a:hover { color: var(--t1); }
+code { font-family: var(--f-mono); font-size: .875em; background: var(--c-bg4); border: 1px solid var(--b1); border-radius: var(--r1); padding: 2px 6px; color: var(--c-blue-b); }
+
+input, textarea, select {
+  font-family: var(--f-body);
+  font-size: var(--fs-sm);
+  background: var(--c-bg3);
+  border: 1px solid var(--b1);
+  border-radius: var(--r2);
+  color: var(--t1);
+  padding: 9.5px 13px;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--tr-base), box-shadow var(--tr-base);
+  line-height: var(--lh-normal);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: rgba(79,142,247,.5);
+  box-shadow: 0 0 0 3px rgba(79,142,247,.1);
+}
+input::placeholder, textarea::placeholder { color: var(--t3); }
+textarea { resize: vertical; min-height: 88px; line-height: var(--lh-relaxed); }
+select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+select option { background: var(--c-bg3); }
+label { display: block; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--t3); margin-bottom: 6px; }
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--b2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--b3); }
+
+@keyframes fadeUp    { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn    { from{opacity:0} to{opacity:1} }
+@keyframes slideRight{ from{opacity:0;transform:translateX(14px)} to{opacity:1;transform:translateX(0)} }
+@keyframes slideLeft { from{opacity:0;transform:translateX(-14px)} to{opacity:1;transform:translateX(0)} }
+@keyframes scaleIn   { from{opacity:0;transform:scale(.96)} to{opacity:1;transform:scale(1)} }
+@keyframes pulse     { 0%,100%{opacity:1} 50%{opacity:.35} }
+@keyframes shimmer   { from{background-position:-200% 0} to{background-position:200% 0} }
+@keyframes spin      { to{transform:rotate(360deg)} }
+@keyframes ping      { 75%,100%{transform:scale(2);opacity:0} }

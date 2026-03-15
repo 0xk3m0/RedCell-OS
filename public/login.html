@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedCell OS v4</title>
+<link rel="stylesheet" href="/css/design.css">
+<link rel="stylesheet" href="/css/components.css">
+<style>
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;overflow:hidden;}
+.bg{position:fixed;inset:0;pointer-events:none;}
+.bg-g1{position:absolute;width:600px;height:600px;border-radius:50%;top:-120px;left:-80px;background:radial-gradient(circle,rgba(79,142,247,.1) 0%,transparent 65%);}
+.bg-g2{position:absolute;width:450px;height:450px;border-radius:50%;bottom:-80px;right:-60px;background:radial-gradient(circle,rgba(240,84,84,.08) 0%,transparent 65%);}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(79,142,247,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 50%,black 0%,transparent 68%);}
+.wrap{width:100%;max-width:420px;padding:22px;position:relative;z-index:1;animation:fadeUp .3s ease;}
+.brand{text-align:center;margin-bottom:34px;}
+.hex{width:50px;height:50px;background:linear-gradient(140deg,#c0392b,#ef4444);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);margin:0 auto 14px;box-shadow:0 0 20px rgba(239,68,68,.3);transition:transform var(--tr-bounce);}
+.brand:hover .hex{transform:rotate(72deg);}
+.bname{font-family:var(--f-mono);font-size:19px;font-weight:700;letter-spacing:.15em;}
+.bname .r{color:var(--c-red);}
+.bsub{font-size:var(--fs-xs);color:var(--t3);font-family:var(--f-mono);letter-spacing:.1em;margin-top:4px;}
+.auth-card{background:var(--c-bg2);border:1px solid var(--b2);border-radius:var(--r5);overflow:hidden;box-shadow:var(--sh4);}
+.auth-tabs{display:flex;border-bottom:1px solid var(--b1);}
+.auth-tab{flex:1;padding:14px;background:transparent;border:none;cursor:pointer;font-family:var(--f-mono);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);transition:all var(--tr-base);border-bottom:2px solid transparent;font-weight:700;}
+.auth-tab.on{color:var(--t1);border-bottom-color:var(--c-blue);background:var(--c-blue-dim);}
+.auth-tab:hover:not(.on){color:var(--t2);background:rgba(255,255,255,.02);}
+.ap{padding:26px 28px;display:none;}
+.ap.on{display:block;animation:fadeUp .2s ease;}
+.ap input{font-size:var(--fs-base);padding:11px 14px;}
+.btn-auth{width:100%;padding:12px;border:none;border-radius:var(--r2);background:var(--c-blue-d);color:#fff;font-family:var(--f-body);font-size:var(--fs-sm);font-weight:700;cursor:pointer;transition:all var(--tr-base);margin-top:6px;letter-spacing:.02em;}
+.btn-auth:hover{background:#1d4ed8;box-shadow:0 4px 20px var(--c-blue-glow);transform:translateY(-1px);}
+.btn-auth:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.aerr{background:var(--c-red-dim);border:1px solid rgba(240,84,84,.3);border-radius:var(--r2);padding:10px 14px;font-size:var(--fs-sm);color:var(--c-red);display:none;margin-top:14px;line-height:var(--lh-normal);}
+.hint{text-align:center;font-size:var(--fs-sm);color:var(--t3);margin-top:18px;}
+</style>
+</head>
+<body>
+<div class="bg"><div class="bg-g1"></div><div class="bg-g2"></div><div class="bg-grid"></div></div>
+<div class="wrap">
+  <div class="brand">
+    <div class="hex"></div>
+    <div class="bname"><span class="r">RED</span>CELL OS</div>
+    <div class="bsub">PERSONAL OPERATING SYSTEM — v4</div>
+  </div>
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button class="auth-tab on" onclick="sw('login')">Login</button>
+      <button class="auth-tab" onclick="sw('register')">Register</button>
+    </div>
+    <div class="ap on" id="p-login">
+      <div class="fg"><label>Email</label><input type="email" id="l-em" placeholder="operator@redcell.io" autocomplete="email"></div>
+      <div class="fg mt-3"><label>Password</label><input type="password" id="l-pw" placeholder="••••••••" autocomplete="current-password"></div>
+      <button class="btn-auth" id="btn-l" onclick="doLogin()">Access System →</button>
+      <div class="aerr" id="l-err"></div>
+    </div>
+    <div class="ap" id="p-reg">
+      <div class="frow">
+        <div class="fg"><label>Username</label><input type="text" id="r-us" placeholder="kareem" autocomplete="username"></div>
+        <div class="fg"><label>Email</label><input type="email" id="r-em" placeholder="you@email.com"></div>
+      </div>
+      <div class="fg mt-3"><label>Password <span style="color:var(--t3)">(min 6)</span></label><input type="password" id="r-pw" placeholder="••••••••" autocomplete="new-password"></div>
+      <div class="fg mt-3"><label>Mission <span style="color:var(--t3)">(optional)</span></label><input type="text" id="r-ms" placeholder="Web Penetration Tester"></div>
+      <button class="btn-auth" id="btn-r" onclick="doReg()">Initialize System →</button>
+      <div class="aerr" id="r-err"></div>
+    </div>
+  </div>
+  <div class="hint">Built for those who build themselves 🔴</div>
+</div>
+<script src="/js/app.js"></script>
+<script>
+if(location.hash==='#register') sw('register');
+function sw(t){
+  document.querySelectorAll('.auth-tab').forEach((b,i)=>b.classList.toggle('on',(t==='login'&&i===0)||(t==='register'&&i===1)));
+  document.getElementById('p-login').classList.toggle('on',t==='login');
+  document.getElementById('p-reg').classList.toggle('on',t==='register');
+}
+async function doLogin(){
+  const em=$('#l-em').value.trim(),pw=$('#l-pw').value,err=$('#l-err'),btn=$('#btn-l');
+  err.style.display='none';if(!em||!pw){err.textContent='Fill all fields';err.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Authenticating...';
+  try{const d=await A.post('/api/auth/login',{email:em,password:pw});if(d.success)location.href=d.redirect||'/dashboard';}
+  catch(e){err.textContent=e.message||'Login failed';err.style.display='block';}
+  finally{btn.disabled=false;btn.textContent='Access System →';}
+}
+async function doReg(){
+  const us=$('#r-us').value.trim(),em=$('#r-em').value.trim(),pw=$('#r-pw').value,ms=$('#r-ms').value.trim(),err=$('#r-err'),btn=$('#btn-r');
+  err.style.display='none';if(!us||!em||!pw){err.textContent='Fill required fields';err.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Initializing...';
+  try{const d=await A.post('/api/auth/register',{username:us,email:em,password:pw,mission:ms});if(d.success)location.href=d.redirect||'/dashboard';}
+  catch(e){err.textContent=e.message||'Registration failed';err.style.display='block';}
+  finally{btn.disabled=false;btn.textContent='Initialize System →';}
+}
+document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;$('#p-login').classList.contains('on')?doLogin():doReg();});
+</script>
+</body>
+</html>

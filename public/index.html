@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RedCell OS v4</title>
+<link rel="stylesheet" href="/css/design.css">
+<link rel="stylesheet" href="/css/components.css">
+<style>
+body{overflow-x:hidden;}
+.ln{position:fixed;top:0;left:0;right:0;z-index:99;padding:14px 0;transition:all .3s;}
+.ln.s{background:rgba(5,8,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--b1);}
+.lni{max-width:1120px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:36px;}
+.lhex{width:26px;height:26px;background:linear-gradient(140deg,#c0392b,#ef4444);clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0% 38%);box-shadow:0 0 12px rgba(240,84,84,.3);}
+.lnm{font-family:var(--f-mono);font-size:13px;font-weight:700;letter-spacing:.14em;}.lnm .r{color:var(--c-red);}
+.llinks{flex:1;display:flex;gap:24px;}.llinks a{font-size:var(--fs-sm);color:var(--t3);font-weight:500;transition:color .15s;}.llinks a:hover{color:var(--t1);}
+
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:100px 0 60px;}
+.hbg{position:absolute;inset:0;pointer-events:none;}
+.hg1{position:absolute;width:700px;height:700px;border-radius:50%;top:-150px;left:10%;background:radial-gradient(circle,rgba(79,142,247,.1) 0%,transparent 65%);}
+.hg2{position:absolute;width:500px;height:500px;border-radius:50%;bottom:0;right:5%;background:radial-gradient(circle,rgba(240,84,84,.07) 0%,transparent 65%);}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(79,142,247,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,.025) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 50%,black 0%,transparent 70%);}
+.hi{max-width:1120px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1;}
+.hbadge{display:inline-flex;align-items:center;gap:7px;background:var(--c-blue-dim);border:1px solid rgba(79,142,247,.2);border-radius:var(--r-full);padding:5px 14px;font-size:10.5px;font-family:var(--f-mono);letter-spacing:.08em;color:var(--c-blue-b);margin-bottom:22px;}
+.htitle{font-size:3.4rem;font-weight:800;letter-spacing:-.03em;line-height:1.07;margin-bottom:16px;font-family:var(--f-disp);}
+.haccent{background:linear-gradient(135deg,var(--c-blue),var(--c-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hsub{font-size:var(--fs-md);color:var(--t2);line-height:var(--lh-relaxed);margin-bottom:28px;max-width:480px;}
+.hbtns{display:flex;gap:10px;margin-bottom:32px;flex-wrap:wrap;}
+.hstats{display:flex;gap:18px;align-items:center;}
+.hsv{font-family:var(--f-mono);font-size:22px;font-weight:800;color:var(--t1);}
+.hsl{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--t3);}
+
+.mock{background:var(--c-bg2);border:1px solid var(--b2);border-radius:18px;overflow:hidden;box-shadow:0 0 40px rgba(79,142,247,.12),var(--sh4);transform:perspective(900px) rotateY(-5deg) rotateX(2deg);transition:transform .5s;}
+.mock:hover{transform:perspective(900px) rotateY(-1deg) rotateX(0);}
+.mtb{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--c-bg3);border-bottom:1px solid var(--b0);}
+.md{display:flex;gap:5px;}.md span{width:8px;height:8px;border-radius:50%;}
+.md span:nth-child(1){background:#ef4444;}.md span:nth-child(2){background:#f59e0b;}.md span:nth-child(3){background:#22c55e;}
+.mbody{display:flex;height:300px;}
+.msb{width:52px;background:var(--c-bg3);border-right:1px solid var(--b0);padding:10px 8px;display:flex;flex-direction:column;gap:7px;}
+.mni{height:7px;border-radius:4px;background:rgba(255,255,255,.07);}.mni.on{background:var(--c-blue);}
+.mc{flex:1;padding:12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;}
+.msr{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;}
+.msc{height:36px;border-radius:5px;}.mscb{background:rgba(79,142,247,.2);}.mscr{background:rgba(240,84,84,.2);}.mscg{background:rgba(52,211,153,.2);}.msca{background:rgba(251,191,36,.2);}
+.mcard{border-radius:5px;background:rgba(255,255,255,.04);}
+
+.si{max-width:1100px;margin:0 auto;padding:0 32px;}
+.section{padding:88px 0;}
+.stag{display:inline-block;font-family:var(--f-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--c-blue-b);background:var(--c-blue-dim);border:1px solid rgba(79,142,247,.2);padding:4px 13px;border-radius:var(--r-full);margin-bottom:13px;}
+.stitle{font-size:2.4rem;font-weight:800;letter-spacing:-.02em;margin-bottom:11px;line-height:1.15;font-family:var(--f-disp);}
+.ssub{font-size:var(--fs-md);color:var(--t2);max-width:520px;margin-bottom:44px;line-height:var(--lh-relaxed);}
+
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.fcard{background:var(--c-bg2);border:1px solid var(--b1);border-radius:var(--r5);padding:24px 20px;transition:all .2s;display:flex;flex-direction:column;gap:10px;}
+.fcard:hover{border-color:var(--b2);transform:translateY(-2px);box-shadow:var(--sh2);}
+.fcard.star{border-color:rgba(240,84,84,.25);box-shadow:0 0 25px rgba(240,84,84,.07);}
+.ficon{width:40px;height:40px;border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:17px;}
+.fi-b{background:rgba(79,142,247,.1);}.fi-r{background:rgba(240,84,84,.1);}.fi-g{background:rgba(52,211,153,.1);}.fi-a{background:rgba(251,191,36,.1);}.fi-p{background:rgba(192,132,252,.1);}.fi-c{background:rgba(34,211,238,.1);}
+.fcard h3{font-size:var(--fs-md);font-weight:700;font-family:var(--f-disp);}
+.fcard p{font-size:var(--fs-sm);color:var(--t2);line-height:var(--lh-relaxed);flex:1;}
+
+.cta{padding:88px 0;position:relative;overflow:hidden;}
+.cta-i{max-width:640px;margin:0 auto;padding:0 32px;text-align:center;position:relative;z-index:1;}
+.cta-g{position:absolute;inset:-50%;background:radial-gradient(circle,rgba(79,142,247,.08) 0%,transparent 55%);pointer-events:none;}
+.cta-i h2{font-size:2.3rem;font-weight:800;margin-bottom:11px;font-family:var(--f-disp);}
+.cta-i p{font-size:var(--fs-md);color:var(--t2);margin-bottom:26px;}
+
+footer{padding:24px 0;border-top:1px solid var(--b0);}
+.fi{max-width:1100px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+.flinks{display:flex;gap:18px;}.flinks a{font-size:var(--fs-sm);color:var(--t3);}
+
+@media(max-width:900px){.hi{grid-template-columns:1fr;}.mock{display:none;}.fgrid{grid-template-columns:1fr 1fr;}.htitle{font-size:2.4rem;}}
+@media(max-width:600px){.fgrid{grid-template-columns:1fr;}.stitle{font-size:1.9rem;}.htitle{font-size:1.9rem;}}
+</style>
+</head>
+<body>
+<nav class="ln" id="lnav">
+  <div class="lni">
+    <div class="flex items-center gap-3"><div class="lhex"></div><div class="lnm"><span class="r">RED</span>CELL OS</div></div>
+    <div class="llinks"><a href="#features">Features</a><a href="#why">Philosophy</a></div>
+    <div class="flex gap-2 ml-auto"><a href="/login" class="btn btn-ghost btn-sm">Login</a><a href="/login#register" class="btn btn-primary btn-sm">Get Started →</a></div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hbg"><div class="hg1"></div><div class="hg2"></div><div class="hgrid"></div></div>
+  <div class="hi">
+    <div>
+      <div class="hbadge"><div class="dot on"></div>v4 — Most Advanced Release</div>
+      <h1 class="htitle">Your Personal OS<br>for <span class="haccent">Cyber Operators</span></h1>
+      <p class="hsub">Full-stack personal operating system. Advanced roadmap builder, Obsidian-style notes, premium settings, mood tracking. Everything connected to a real database.</p>
+      <div class="hbtns"><a href="/login#register" class="btn btn-primary btn-lg">Enter the System →</a><a href="#features" class="btn btn-ghost btn-lg">See Features</a></div>
+      <div class="hstats">
+        <div><div class="hsv">11</div><div class="hsl">Pages</div></div>
+        <div style="width:1px;height:30px;background:var(--b1);"></div>
+        <div><div class="hsv">∞</div><div class="hsl">Roadmaps</div></div>
+        <div style="width:1px;height:30px;background:var(--b1);"></div>
+        <div><div class="hsv">100%</div><div class="hsl">Functional</div></div>
+      </div>
+    </div>
+    <div class="mock">
+      <div class="mtb"><div class="md"><span></span><span></span><span></span></div><span style="font-family:var(--f-mono);font-size:9.5px;color:var(--t3);">redcell.local/settings</span></div>
+      <div class="mbody">
+        <div class="msb"><div class="mni on"></div><div class="mni"></div><div class="mni"></div><div class="mni"></div><div class="mni"></div></div>
+        <div class="mc">
+          <div class="msr"><div class="msc mscb"></div><div class="msc mscr"></div><div class="msc mscg"></div><div class="msc msca"></div></div>
+          <div class="mcard" style="height:80px;"></div>
+          <div style="display:flex;gap:5px;"><div class="mcard flex-1" style="height:50px;"></div><div class="mcard flex-1" style="height:50px;"></div></div>
+          <div class="mcard" style="height:28px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="si">
+    <div class="stag">WHAT'S INSIDE</div>
+    <h2 class="stitle">Every Feature,<br><span style="background:linear-gradient(135deg,var(--c-blue),var(--c-purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Every Button Working</span></h2>
+    <p class="ssub">Plus Jakarta Sans + Nunito + Fira Code. Comfortable font sizes. Dark theme. Every API call hits real SQLite.</p>
+    <div class="fgrid">
+      <div class="fcard"><div class="ficon fi-b">⌂</div><h3>Smart Dashboard</h3><p>Weekly focus chart, daily note, energy tracking, habits preview, recent sessions.</p></div>
+      <div class="fcard star"><div class="ficon fi-r">⬡</div><h3>Advanced Roadmap Builder</h3><p>Multiple roadmaps. Add/edit/delete groups & topics. Progress sliders, subtopics, resources, labs, personal notes.</p><div class="flex gap-2"><span class="badge b-red">Multi-Map</span><span class="badge b-red">Full CRUD</span></div></div>
+      <div class="fcard"><div class="ficon fi-g">◉</div><h3>Habits & Recovery</h3><p>Color-coded habits with 7-day grids, streaks, emergency mode protocol.</p></div>
+      <div class="fcard"><div class="ficon fi-a">◈</div><h3>Advanced Projects</h3><p>Per-project tasks (auto-progress), notes, tech stack, priority, dates, CV marking.</p></div>
+      <div class="fcard star"><div class="ficon fi-p">📓</div><h3>Obsidian Notes Vault</h3><p>3-panel layout. Sub-pages inside pages. Custom categories with icons & colors. Breadcrumb navigation. Auto-save.</p><div class="flex gap-2"><span class="badge b-purple">Sub-pages</span><span class="badge b-purple">Tree</span></div></div>
+      <div class="fcard star"><div class="ficon fi-c">⚙</div><h3>Premium Settings</h3><p>6-section settings: Profile, Appearance (accent colors), Focus config, Account security, Lifetime stats, Danger zone.</p><div class="flex gap-2"><span class="badge b-cyan">6 Sections</span><span class="badge b-cyan">Accent Colors</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-i"><div class="cta-g"></div>
+    <h2>One <code>npm install</code> Away</h2>
+    <p>Free, open-source, runs locally. Your data stays yours.</p>
+    <div class="flex gap-3 justify-center flex-wrap"><a href="/login#register" class="btn btn-primary btn-lg">Create Account →</a><a href="/login" class="btn btn-ghost btn-lg">Login</a></div>
+  </div>
+</section>
+
+<footer><div class="fi">
+  <div class="flex items-center gap-3"><div class="lhex" style="width:18px;height:18px;"></div><span class="mono text-sm"><span style="color:var(--c-red);">RED</span>CELL OS v4</span></div>
+  <div class="t3 text-sm">Built for those who build themselves.</div>
+  <div class="flinks"><a href="/dashboard">Dashboard</a><a href="/roadmap">Roadmap</a><a href="/login">Login</a></div>
+</div></footer>
+
+<script src="/js/app.js"></script>
+<script>
+window.addEventListener('scroll',()=>document.getElementById('lnav').classList.toggle('s',window.scrollY>20));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});}));
+</script>
+</body>
+</html>
