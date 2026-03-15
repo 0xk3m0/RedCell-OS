@@ -1,8 +1,7 @@
-# 🔴 RedCell OS v4
+# 🔴 RedCell OS
 
 ## Quick Start
 ```bash
-cd rc4
 npm install
 cp .env.example .env
 npm start
